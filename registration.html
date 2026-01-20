@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التسجيل - Dalil Fazzara</title>
+
+    <!-- Google Fonts: Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tailwind Config -->
+    <script src="config/tailwind_config.js"></script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/fazzara.png">
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .file-upload-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px dashed #cbd5e1;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-box:hover {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        input:focus,
+        select:focus {
+            transform: scale(1.01);
+            transition: all 0.2s ease;
+        }
+
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .slide-down {
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-50 to-teal-50 min-h-screen">
+
+    <!-- Splash Screen (Loading Screen) -->
+    <div id="splash-screen" class="fixed inset-0 bg-white z-[9999] flex items-center justify-center">
+        <div class="splash-container">
+            <img src="images/fazara.png" alt="Dalil Fazara" class="splash-logo">
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <div id="navbar-container" data-page="registration"></div>
+
+    <!-- Registration Section -->
+    <section id="add-service" class="py-16">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-dark">سجل بياناتك مجاناً</h2>
+                <p class="text-secondary mt-2">انضم لقائمة الحرفيين ودع العملاء يجدونك بسهولة</p>
+            </div>
+
+            <form id="add-worker-form"
+                class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-lg space-y-6">
+
+                <div class="grid grid-cols-1  gap-6">
+                    <!-- الاسم -->
+                    <div>
+                        <label class="block text-sm font-bold text-dark mb-1">الاسم <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" id="name" required placeholder="مثال: أحمد محمد"
+                            class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-primary outline-none">
+                    </div>
+
+                    <!-- المهنة -->
+                    <div>
+                        <label class="block text-sm font-bold text-dark mb-1">المهنة <span
+                                class="text-red-500">*</span></label>
+                        <select id="job-select" required
+                            class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:border-primary outline-none bg-white">
+                            <option value="">اختر المهنة</option>
+                            <option value="عيادات طبيه">عيادات طبيه</option>
+                            <option value="طبيب عظام">طبيب عظام</option>
+                            <option value="طبيب جلدية">طبيب جلدية</option>
+                            <option value="طبيب عيون">طبيب عيون</option>
+                            <option value="طبيب مخ واعصاب">طبيب مخ واعصاب</option>
+                            <option value="طبيب باطنه">طبيب باطنه</option>
+                            <option value="طبيب اسنان">طبيب اسنان</option>
+                            <option value="طبيبه نساء">طبيبه نساء</option>
+                            <option value="طبيب بيطري">طبيب بيطري</option>
+                            <option value="معلمين">معلمين</option>
+                            <option value="محامي">محامي</option>
+                            <option value="صيدلي">صيدلي</option>
+                            <option value="سوبر ماركت">سوبر ماركت</option>
+                            <option value="صيانه موبايل">صيانه موبايل</option>
+                            <option value="سائق توك توك">سائق توك توك</option>
+                            <option value="سائق ميكروباص">سائق ميكروباص</option>
+                            <option value="تروسكل أنابيب">تروسكل أنابيب</option>
+                            <option value="كهربائي">فني كهربائي</option>
+                            <option value="فني غسالات">فني غسالات</option>
+                            <option value="فني تكييف">فني تكييف</option>
+                            <option value="فني ثلاجات">فني ثلاجات</option>
+                            <option value="فني ألوميتال">فني ألوميتال</option>
+                            <option value="فني كاميرات مراقبة">فني كاميرات مراقبة</option>
+                            <option value="فني دش">فني اطباق دش</option>
+                            <option value="عامل بناء">عامل بناء</option>
+                            <option value="مبلط سيراميك">مبلط سيراميك</option>
+                            <option value="صنايعى جبس">صنايعى جبس معلق</option>
+                            <option value="مقاول تشطيبات ">مقاول تشطيبات </option>
+                            <option value="محاره و تشطيب">محاره و تشطيب</option>
+                            <option value="سباك">فني سباكه</option>
+                            <option value="للرخام والجرانيت">للرخام والجرانيت</option>
+                            <option value="نجار">نجار</option>
+                            <option value="نقاشه">نقاشه</option>
+                            <option value="حداد">حداد</option>
+                            <option value="ترزي">ترزي</option>
+                            <option value="مكانيكي">مكانيكي</option>
+                            <option value="دليفري">دليفري</option>
+                            <option value="other">مهنة أخرى (اكتبها بنفسك)</option>
+                        </select>
+
+                        <!-- حقل الإدخال اليدوي -->
+                        <input type="text" id="job-custom" placeholder="اكتب مهنتك هنا..."
+                            class="hidden w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-primary outline-none mt-2">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- المكان -->
+                    <div>
+                        <label class="block text-sm font-bold text-dark mb-1">المكان / المنطقة <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" id="location" required placeholder="مثال: فزارة، بناويط"
+                            class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-primary outline-none">
+                    </div>
+
+                    <!-- الهاتف -->
+                    <div>
+                        <label class="block text-sm font-bold text-dark mb-1">رقم الهاتف <span
+                                class="text-red-500">*</span></label>
+                        <input type="tel" id="phone" maxlength="11" minlength="11" required placeholder="01xxxxxxxxx"
+                            class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-primary outline-none text-left"
+                            dir="ltr">
+                    </div>
+
+                    <!-- الهاتف الإضافي -->
+                    <div>
+                        <label class="block text-sm font-bold text-dark mb-1">رقم هاتف إضافي (اختياري)</label>
+                        <input type="tel" id="phone-other" maxlength="11" placeholder="01xxxxxxxxx (اختياري)"
+                            class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-primary outline-none text-left"
+                            dir="ltr">
+                    </div>
+                </div>
+
+                <!-- صور -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- الصورة الشخصية -->
+                    <div>
+                        <label class="block text-sm font-bold text-dark mb-2">الصورة الشخصية <span
+                                class="text-red-500">*</span></label>
+                        <div
+                            class="file-upload-box relative w-40 h-40 rounded-full flex flex-col items-center justify-center cursor-pointer mx-auto">
+                            <input type="file" id="profile-image" accept="image/jpeg,image/jpg,image/png,image/webp"
+                                required class="absolute inset-0 opacity-0 cursor-pointer z-10 rounded-full">
+                            <div id="profile-preview-area" class="text-center pointer-events-none">
+                                <i class="fa-solid fa-user-circle text-3xl text-slate-400 mb-2"></i>
+                                <p class="text-sm font-bold text-slate-600">الصورة الشخصية</p>
+                                <p class="text-xs text-slate-400">اضغط للاختيار</p>
+                            </div>
+                            <img id="profile-preview-img"
+                                class="absolute inset-0 w-full h-full object-cover rounded-full hidden">
+                            <!-- أيقونة التحرير -->
+                            <button id="profile-edit-btn" type="button"
+                                class="absolute bottom-0 right-0 w-12 h-12 bg-primary hover:bg-primaryDark text-white rounded-full shadow-lg flex items-center justify-center opacity-0 translate-y-4 transition-all duration-300 pointer-events-none hidden z-20">
+                                <i class="fa-solid fa-pen text-lg"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-1">الحد الأقصى: 5MB</p>
+                    </div>
+
+                    <!-- صورة العمل -->
+                    <div>
+                        <label class="block text-sm font-bold text-dark mb-2">صورة من شغلك <span
+                                class="text-red-500">*</span></label>
+                        <div
+                            class="file-upload-box relative h-40 rounded-xl flex flex-col items-center justify-center cursor-pointer">
+                            <input type="file" id="work-image" accept="image/jpeg,image/jpg,image/png,image/webp"
+                                required class="absolute inset-0 opacity-0 cursor-pointer z-10">
+                            <div id="work-preview-area" class="text-center pointer-events-none">
+                                <i class="fa-solid fa-briefcase text-3xl text-slate-400 mb-2"></i>
+                                <p class="text-sm font-bold text-slate-600">صورة من شغلك</p>
+                                <p class="text-xs text-slate-400">اضغط للاختيار</p>
+                            </div>
+                            <img id="work-preview-img"
+                                class="absolute inset-0 w-full h-full object-cover rounded-xl hidden">
+                            <!-- أيقونة التحرير -->
+                            <button id="work-edit-btn" type="button"
+                                class="absolute bottom-3 right-3 w-12 h-12 bg-primary hover:bg-primaryDark text-white rounded-full shadow-lg flex items-center justify-center opacity-0 translate-y-4 transition-all duration-300 pointer-events-none hidden z-20">
+                                <i class="fa-solid fa-pen text-lg"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-1">الحد الأقصى: 5MB</p>
+                    </div>
+                </div>
+
+                <button type="submit" id="submit-btn"
+                    class="w-full bg-primary hover:bg-primaryDark text-white font-bold py-4 rounded-xl shadow-lg transition-all flex justify-center items-center gap-2">
+                    <span>حفظ البيانات</span> <i class="fa-solid fa-check"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-slate-400 py-6 text-center mt-auto">
+        <p class="text-sm">© 2026 دليل فزارة للخدمات - Powered by <strong>Esssam Mohamed</strong></p>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toast-container"
+        class="fixed top-0 left-1/2 -translate-x-1/2 z-[9999] flex flex-col items-center gap-3 pt-6"></div>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+        <div class="relative max-w-2xl max-h-[90vh]">
+            <img id="modal-image" src="" alt="صورة مكبرة" class="w-full h-full object-contain rounded-lg">
+            <button id="modal-close"
+                class="absolute top-4 right-4 bg-white/90 hover:bg-white text-dark p-2 rounded-full shadow-lg transition-all">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top"
+        class="fixed bottom-8 right-8 w-14 h-14 bg-primary hover:bg-primaryDark text-white rounded-full shadow-lg opacity-0 -translate-y-20 transition-all duration-300 pointer-events-none hover:shadow-xl z-40 flex items-center justify-center"
+        title="العودة للأعلى">
+        <i class="fa-solid fa-arrow-up text-xl"></i>
+    </button>
+
+    <!-- Scripts - Order matters! -->
+    <script src="js/config_Supabase.js"></script>
+    <script src="js/utilities.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/register.js"></script>
+
+</body>
+
+</html>
