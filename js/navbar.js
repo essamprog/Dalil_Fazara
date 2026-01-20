@@ -5,9 +5,9 @@ function createNavbar(currentPage = 'home') {
                 <div class="flex justify-between items-center h-16">
                     <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
                         <div id="navbar-logo" class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-white flex items-center justify-center shadow-sm border border-slate-200">
-                            <img src="images/fazara.png" alt="Dalil Fazzara" class="w-full h-full object-cover">
+                            <img src="images/fazara.png" alt="دليل فزارة" class="w-full h-full object-cover">
                         </div>
-                        <span class="font-bold text-xl text-dark">Dalil Fazara</span>
+                        <span class="font-bold text-xl text-dark">دليل فزارة</span>
                     </a>
                     
                     ${currentPage === 'home' ? `
@@ -48,4 +48,5 @@ document.addEventListener('DOMContentLoaded', function () {
         const currentPage = navbarContainer.dataset.page || 'home';
         navbarContainer.innerHTML = createNavbar(currentPage);
     }
+
 });
