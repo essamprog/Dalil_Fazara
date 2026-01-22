@@ -130,13 +130,19 @@ function createCardHTML(worker) {
         </div>
 
 
-        <div class="flex items-center gap-3 mb-3 text-lg font-semibold">
-            <span class="text-primary truncate">${worker.job}</span>
-            <span class="flex items-center gap-1 text-secondary text-sm">
-                <i class="fa-solid fa-location-dot"></i> 
+        <div class="mb-3">
+            <!-- المهنة -->
+            <div class="text-primary text-lg font-semibold truncate">
+                ${worker.job}
+            </div>
+        
+            <!-- المكان -->
+            <div class="flex items-center gap-1 text-secondary text-sm mt-1">
+                <i class="fa-solid fa-location-dot"></i>
                 <span class="truncate">${worker.location}</span>
-            </span>
+            </div>
         </div>
+
 
         <div class="text-dark text-xl font-bold mb-4 flex items-center gap-2">
             <i class="fa-solid fa-phone text-primary text-lg"></i>
@@ -501,4 +507,5 @@ document.addEventListener('click', (e) => {
 // إيقاف التتبع عند مغادرة الصفحة
 window.addEventListener('beforeunload', () => {
     tracker.stopTracking();
+
 });
